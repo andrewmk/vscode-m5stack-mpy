@@ -79,6 +79,13 @@ function startProvider () {
     completions[11].commitCharacters = ['.'];
 
     /**
+     * Power
+     */
+    completions[12] = new vscode.CompletionItem('power', vscode.CompletionItemKind.Module);
+    completions[12].detail = 'Power';
+    completions[12].commitCharacters = ['.'];
+
+    /**
      * Auto add variable type
      */
     let variableCompletions = variables.map(item => {
@@ -330,6 +337,31 @@ function endProvider (document, position, token, context) {
                     completion2,
                     completion3,
                     completion4
+                ];
+            }
+
+        // Power
+        case linePrefix.endsWith('power.'):
+            {
+                let completion0 = new vscode.CompletionItem('isCharging', vscode.CompletionItemKind.Method);
+                completion0.detail = 'isCharging()';
+                completion0.documentation = 'Return true if is charging';
+                completion0.insertText = new vscode.SnippetString('isCharging()');
+
+                let completion1 = new vscode.CompletionItem('getBatteryLevel', vscode.CompletionItemKind.Method);
+                completion1.detail = 'getBatteryLevel()';
+                completion1.documentation = 'Return battery level.';
+                completion1.insertText = new vscode.SnippetString('getBatteryLevel()');
+
+                let completion2 = new vscode.CompletionItem('isChargeFull', vscode.CompletionItemKind.Method);
+                completion2.detail = 'isChargeFull()';
+                completion2.documentation = 'Return true if battery charge is full.';
+                completion2.insertText = new vscode.SnippetString('isChargeFull()');
+                
+                return [
+                    completion0,
+                    completion1,
+                    completion2
                 ];
             }
 
